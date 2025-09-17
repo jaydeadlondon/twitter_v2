@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twitter Clone</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="authModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🐦 Twitter v2.0</h2>
+                <p>Введите API ключ для входа</p>
+            </div>
+            <div class="auth-form">
+                <input type="text" id="apiKeyInput" placeholder="Введите API ключ..." class="input">
+                <button onclick="login()" class="btn btn-primary">Войти</button>
+                
+                <div class="divider">или выберите пользователя</div>
+                
+                <div class="user-buttons">
+                    <button onclick="quickLogin('alice-key-123')" class="btn btn-user">
+                        <span class="user-avatar">A</span>
+                        <div>
+                            <div class="user-name">Alice</div>
+                            <div class="user-key">alice-key-123</div>
+                        </div>
+                    </button>
+                    <button onclick="quickLogin('bob-key-456')" class="btn btn-user">
+                        <span class="user-avatar">B</span>
+                        <div>
+                            <div class="user-name">Bob</div>
+                            <div class="user-key">bob-key-456</div>
+                        </div>
+                    </button>
+                    <button onclick="quickLogin('charlie-key-789')" class="btn btn-user">
+                        <span class="user-avatar">C</span>
+                        <div>
+                            <div class="user-name">Charlie</div>
+                            <div class="user-key">charlie-key-789</div>
+                        </div>
+                    </button>
+                </div>
+                
+                <div class="api-docs">
+                    <a href="/api/docs" target="_blank" class="link">📖 API Документация</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="app" class="app hidden">
+        <header class="header">
+            <div class="container">
+                <div class="header-content">
+                    <div class="logo">
+                        <h1>🐦 Twitter v2</h1>
+                    </div>
+                    <div class="user-info">
+                        <span id="currentUser" class="current-user"></span>
+                        <button onclick="logout()" class="btn btn-ghost">Выйти</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="main">
+            <div class="container">
+                <div class="content">
+                    <aside class="sidebar">
+                        <nav class="nav">
+                            <button onclick="showSection('feed')" class="nav-item active" data-section="feed">
+                                🏠 Лента
+                            </button>
+                            <button onclick="showSection('profile')" class="nav-item" data-section="profile">
+                                👤 Профиль
+                            </button>
+                            <button onclick="showSection('users')" class="nav-item" data-section="users">
+                                👥 Пользователи
+                            </button>
+                        </nav>
+                    </aside>
+
+                    <div class="main-content">
+                        <div class="tweet-composer">
+                            <div class="composer-header">
+                                <h3>Что происходит?</h3>
+                            </div>
+                            <div class="composer-form">
+                                <textarea id="tweetText" placeholder="Поделитесь своими мыслями..." maxlength="280"></textarea>
+                                <div class="composer-actions">
+                                    <div class="char-count">
+                                        <span id="charCount">280</span>
+                                    </div>
+                                    <div class="actions">
+                                        <input type="file" id="imageInput" accept="image/*" style="display: none;">
+                                        <button onclick="document.getElementById('imageInput').click()" class="btn btn-ghost">📷</button>
+                                        <button onclick="postTweet()" class="btn btn-primary" id="tweetBtn">Твитнуть</button>
+                                    </div>
+                                </div>
+                                <div id="imagePreview" class="image-preview hidden"></div>
+                            </div>
+                        </div>
+
+                        <div id="feedSection" class="section active">
+                            <div class="section-header">
+                                <h2>Лента твитов</h2>
+                                <button onclick="loadFeed()" class="btn btn-ghost">🔄 Обновить</button>
+                            </div>
+                            <div id="tweetsList" class="tweets-list">
+                                <div class="loading">Загрузка твитов...</div>
+                            </div>
+                        </div>
+
+                        <div id="profileSection" class="section">
+                            <div class="section-header">
+                                <h2>Мой профиль</h2>
+                            </div>
+                            <div id="profileInfo" class="profile-info">
+                                <div class="loading">Загрузка профиля...</div>
+                            </div>
+                        </div>
+
+                        <div id="usersSection" class="section">
+                            <div class="section-header">
+                                <h2>Пользователи</h2>
+                            </div>
+                            <div id="usersList" class="users-list">
+                                <div class="loading">Загрузка пользователей...</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
