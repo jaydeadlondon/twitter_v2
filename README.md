@@ -56,7 +56,7 @@
 
 1. **Клонируйте репозиторий:**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/jaydeadlondon/twitter_v2.git
    cd twitter_v2
    ```
 
@@ -193,23 +193,6 @@ media (id, tweet_id, filename, original_filename, content_type, file_size, creat
 | `DATABASE_URL` | URL базы данных PostgreSQL | см. config.py |
 | `SECRET_KEY` | Секретный ключ Flask | генерируется |
 | `UPLOAD_FOLDER` | Директория для загрузок | ./uploads |
-
-### Настройка production:
-
-1. **Установите переменные окружения:**
-   ```bash
-   export FLASK_ENV=production
-   export SECRET_KEY=your-super-secret-production-key
-   export DATABASE_URL=postgresql://user:password@host:port/dbname
-   ```
-
-2. **Обновите docker-compose.yml:**
-   ```yaml
-   environment:
-     - FLASK_ENV=production
-     - SECRET_KEY=your-production-secret
-     - DATABASE_URL=postgresql://...
-   ```
 
 ## 📁 Структура проекта
 
